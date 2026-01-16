@@ -186,13 +186,15 @@ footer {
     padding: 8px 12px;
     border-radius: 8px;
     color: #071029;
-    transition: background-color 0.3s ease, padding 0.6s ease;
+    // transition: background-color 0.3s ease, padding 0.6s ease;
 }
 
+/*
 .btn:hover {
     background-color: #f59e0b;
     padding: 16px 24px;
 }
+    */
 
 .btn.secondary {
     background: transparent;
@@ -200,23 +202,3 @@ footer {
     color: #e6eef8;
 }
 
-@keyframes pulseCard {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 6px 18px rgba(3,7,18,0.6);
-    }
-
-    50% {
-        transform: scale(1.01);
-        box-shadow: 0 12px 24px rgba(3,7,18,0.8);
-    }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 6px 18px rgba(3,7,18,0.6);
-    }
-}
-
-.card {
-    animation: pulseCard 3s infinite;
-}

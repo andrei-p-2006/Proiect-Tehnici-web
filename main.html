@@ -42,6 +42,7 @@
                 </ul>
                 <div class="buttons">
                     <a class="btn secondary" href="https://www.imdb.com/title/tt0145487/" target="_blank">IMDB</a>
+                    <button class="btn remove-btn" data-movie="1">Șterge</button>
                 </div>
             </article>
 
@@ -56,6 +57,7 @@
                 </ul>
                 <div class="buttons">
                     <a class="btn secondary" href="https://www.imdb.com/title/tt0316654/" target="_blank">IMDB</a>
+                    <button class="btn remove-btn" data-movie="2">Șterge</button>
                 </div>
             </article>
 
@@ -70,6 +72,7 @@
                 </ul>
                 <div class="buttons">
                     <a class="btn secondary" href="https://www.imdb.com/title/tt0413300/" target="_blank">IMDB</a>
+                    <button class="btn remove-btn" data-movie="3">Șterge</button>
                 </div>
             </article>
         </main>
@@ -79,9 +82,23 @@
             <p>Trilogia lui Sam Raimi a revoluționat genul filmelor cu supereroi și a adus o abordare emoțională și dramatică personajului Spider-Man.</p>
         </section>
 
+        <div class="buttons">
+            <div class="restore-panel">
+                <button class="btn secondary restore-btn" data-movie="1">+1</button>
+                <button class="btn secondary restore-btn" data-movie="2">+2</button>
+                <button class="btn secondary restore-btn" data-movie="3">+3</button>
+            </div>
+        </div>
+
+        <input type="text"
+               id="movieInput"
+               placeholder="Scrie 1, 2 sau 3">
+        </input>
+
         <footer>
             <p>Pagina include informații despre Spider-Man (2002–2007).</p>
         </footer>
     </div>
+    <script src="main.js"></script>
 </body>
 </html>

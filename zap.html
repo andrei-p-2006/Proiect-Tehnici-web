@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Zap TV</title>
+</head>
+<body>
+    <canvas id="tvCanvas" width="300" height="200" style="cursor:pointer; border:1px solid #000;"></canvas>
+    <div id="movie-info" style="margin-top: 20px;"></div>
+
+    <script>
+        const canvas = document.getElementById('tvCanvas');
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'gray';
+        ctx.fillRect(10, 10, 280, 180); // Carcasa
+        ctx.fillStyle = 'white';
+        ctx.fillRect(20, 20, 200, 160); // Ecranul
+
+        const colors = ['yellow', 'green', 'cyan', 'magenta', 'red', 'blue'];
+        colors.forEach((col, i) => {
+            ctx.fillStyle = col;
+            ctx.fillRect(20 + (i * 33.3), 20, 33.3, 160);
+        });
+
+        ctx.fillStyle = 'white';
+        ctx.beginPath(); ctx.arc(250, 60, 15, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(250, 100, 10, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(250, 135, 7, 0, Math.PI * 2); ctx.fill();
+
+        canvas.addEventListener('click', function() {
+            fetch('zap.json')
+                .then(response => response.json())
+                .then(data => {
+                    const movies = data.movies; 
+                    const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+                    displayMovie(randomMovie);
+                })
+                .catch(err => console.error("Eroare fetch JSON:", err));
+        });
+
+        function displayMovie(movie) {
+            const infoDiv = document.getElementById('movie-info');
+
+            infoDiv.innerHTML = `
+                <p><strong>${movie.data_ora}</strong></p>
+                <p>${movie.titlu}</p>
+                <img src="${movie.poster}" id="poster" style="width:150px;">
+                <div id="extra-info" style="display:none; margin-top:10px;">
+                    <p>Cu: ${movie.distributie}. Rating: ${movie.rating}</p>
+                </div>
+            `;
+
+            const poster = document.getElementById('poster');
+            const extra = document.getElementById('extra-info');
+
+            poster.onmouseover = () => extra.style.display = 'block';
+            poster.onmouseout = () => extra.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

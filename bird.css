@@ -1,0 +1,110 @@
+﻿body {
+    background-color: lightblue;
+}
+
+.container {
+    display: grid;
+    /* 7. Coloane de 75px [cite: 7] */
+    grid-template-columns: repeat(5, 75px);
+    /* 8. Spațiu de 4px între linii și coloane [cite: 8] */
+    gap: 4px;
+    justify-content: center;
+}
+
+    /* 9. Divurile să aibă padding de 22px [cite: 9] */
+    .container > div {
+        padding: 22px;
+        /* 10. Text centrat pe orizontală [cite: 10] */
+        text-align: center;
+        /* 11. Fundal Floralwhite, text negru, border punctat de 4px [cite: 11] */
+        background-color: floralwhite;
+        color: black;
+        border: 4px dotted black;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+/* 11. Ciocul și picioarele au fundal Coral [cite: 11] */
+.cioc, .picior {
+    background-color: coral;
+}
+
+/* 12. Divul în formă de cerc, fundal LightGray, fără border [cite: 12] */
+.cerc {
+    width: 30px;
+    height: 30px;
+    background-color: lightgray;
+    border-radius: 50%;
+    border: none;
+    /* 17. Tranziție de 0.3 secunde [cite: 17] */
+    transition: all 0.3s;
+}
+
+    /* 15, 16, 17. Hover pe cerc [cite: 15, 16, 17] */
+    .cerc:hover {
+        background-color: crimson;
+        color: crimson;
+        /* Se micșorează la o treime [cite: 17] */
+        transform: scale(0.33);
+    }
+
+/* --- POZIȚIONARE EXACTĂ --- */
+
+.cap {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 2;
+    height: 154px; /* (75px * 2) + 4px gap */
+}
+
+.cioc {
+    grid-column: 1;
+    grid-row: 2; /* Plasat pe al doilea rând al gridului */
+    height: 75px;
+    /* Aliniere pe latura de jos cu capul */
+    align-self: end;
+}
+
+.gat:nth-of-type(3) {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.gat:nth-of-type(4) {
+    grid-column: 3;
+    grid-row: 4;
+}
+
+.corp {
+    grid-column: 3 / span 3;
+    grid-row: 5 / span 2;
+    height: 154px;
+}
+
+.picior:nth-of-type(6) {
+    grid-column: 4;
+    grid-row: 7;
+}
+
+.picior:nth-of-type(7) {
+    grid-column: 4;
+    grid-row: 8;
+}
+
+/* 4. Media Query pentru lățime între 350px și 600px [cite: 18] */
+@media (min-width: 350px) and (max-width: 600px) {
+    .container {
+        display: block; /* Afișare format default, unele sub altele [cite: 18] */
+    }
+
+        .container > div {
+            width: 100%; /* Ocupă întreaga lățime a containerului [cite: 18] */
+            margin-bottom: 4px;
+        }
+
+    .cerc {
+        /* 19. Cercul micșorat la jumătate pe orizontală [cite: 19] */
+        transform: scaleX(0.5);
+    }
+}

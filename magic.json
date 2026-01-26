@@ -1,0 +1,16 @@
+{
+	"answers": [
+		{
+			"mesaj": "Da, cu siguran??!",
+			"tip": "afirmativ"
+		},
+		{
+			"mesaj": "Nu miza pe asta.",
+			"tip": "negativ"
+		},
+		{
+			"mesaj": "Concentrate and ask again",
+			"tip": "neutru"
+		}
+	]
+}

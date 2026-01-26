@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>8 Magic Ball</title>
+</head>
+<body>
+    <canvas id="magicBall" width="300" height="300" style="cursor:pointer"></canvas>
+    <div id="response" style="font-size: 20px; font-weight: bold; margin-top: 20px;"></div>
+
+    <script>
+        const canvas = document.getElementById('magicBall');
+        const ctx = canvas.getContext('2d');
+        const responseDiv = document.getElementById('response');
+
+        function drawBall(centerColor = 'white') {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Bila neagră
+            ctx.beginPath();
+            ctx.arc(150, 150, 140, 0, Math.PI * 2);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+
+            [cite_start]// Discul central (alb/colorat) [cite: 191]
+            ctx.beginPath();
+            ctx.arc(150, 150, 60, 0, Math.PI * 2);
+            ctx.fillStyle = centerColor;
+            ctx.fill();
+
+            // Cifra 8 (doar dacă e alb centrul)
+            if (centerColor === 'white') {
+                ctx.fillStyle = 'black';
+                ctx.font = 'bold 60px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('8', 150, 150);
+            }
+        }
+
+        drawBall();
+
+        [cite_start]// 7. Click pentru răspuns din JSON [cite: 191, 192, 193]
+        canvas.addEventListener('click', () => {
+            fetch('magic.json')
+                .then(res => res.json())
+                .then(data => {
+                    const answers = data.answers;
+                    const randomIdx = Math.floor(Math.random() * answers.length);
+                    const selected = answers[randomIdx];
+
+                    let color;
+                    [cite_start]// Logica de colorare în funcție de tipul răspunsului [cite: 195, 196]
+                    if (selected.tip === 'afirmativ') color = 'green';
+                    else if (selected.tip === 'negativ') color = 'red';
+                    else color = 'orange';
+
+                    // Actualizăm bila și textul
+                    drawBall(color);
+                    responseDiv.innerText = selected.mesaj;
+                    responseDiv.style.color = color;
+                })
+                .catch(err => console.error("Eroare fetch:", err));
+        });
+    </script>
+</body>
+</html>
